@@ -25,8 +25,10 @@ void main() {
 	int key_str[100] = {0};
 	//int key_mtr[10][10] = { 0 };
 	int file_str[100] = { 0 };
-	int p = 5;// размерность строки-ключа
+	
+	//***********************************
 	int n = 4;//размерность матрицы ключа
+	//***********************************
 	int k = 0;
 	int m = 97;//количество символов в алфавите
 	char buff;
@@ -40,14 +42,15 @@ void main() {
 	for (int i = 0; i < n; ++i) {
 		key_mtr[i] = new int[n];
 	}
-
+	
 	while (true) {
-		cout << "Введите ключ" << endl;
+		cout << "Введите ключ (без пробелов)" << endl;
 		cin >> key_tr;
 		if (!cheak_key(key_tr)) { cout << "недопустимый ключ" << endl; }
 		else { break; }
 	}
 	for (int i = 0; i < key_tr.size(); i++) { key_str[i] = key_tr[i]; }
+	int p = key_tr.size();
 	while (fl) {
 		for (int i = 0; i < n; i++) {//формируем блок символов
 			buff = file1.get(); // считываем очередной символ
@@ -76,9 +79,15 @@ void main() {
 				if (k == p) { k = 0; };
 			}
 		}
+		
+		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
+
+
 		if (n != 0) {
 			key_mtr = degenerate_matrix(key_mtr, n);//проверяем на вырожденность
+
 		}
+		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
 		for (int i = 0; i < n; i++) { // кодируем i-элемент полученного вектора
 			int S = 0;
 			for (int j = 0; j < n; j++) {

@@ -13,7 +13,7 @@ void decode() {
 	cdelatK1(K1);
 	string key_tr;
 	int file_str[100] = { 0 };
-	int p = 5;
+	//int p = 5;
 	int n = 4;
 	int k = 0;
 	int m = 97;
@@ -25,6 +25,7 @@ void decode() {
 		key_mtr[i] = new int[n];
 	}
 	int key_str[100] = {0};
+
 	while (true) {
 		cout << "Введите ключ" << endl;
 		cin >> key_tr;
@@ -32,6 +33,7 @@ void decode() {
 		else { break; }
 	}
 	for (int i = 0; i < key_tr.size(); i++) { key_str[i] = key_tr[i]; }
+	int p = key_tr.size();
 	while (fl) {
 		for (i = 0; i < n; i++) {
 			buff = file1.get(); // считываем очередной символ
@@ -49,19 +51,16 @@ void decode() {
 				if (k == p) { k = 0; };
 			}
 		}
+		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
 
-		key_mtr = degenerate_matrix(key_mtr, n);
+		if (n != 0) {
+			key_mtr = degenerate_matrix(key_mtr, n);//проверяем на вырожденность
+		}
+		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
+		//key_mtr = degenerate_matrix(key_mtr, n);
 		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
 		key_mtr = invers(key_mtr, n);// строим обратную матрицу к матрице - ключу
 		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
-		//for (i = 0; i < n; i++) {
-			//buff = file1.get(); // считываем очередной символ
-			//if (file1.eof()) {// если файл не закончился
-				//fl = false; n = i;
-			//}
-			//file_str[i] = buff - 30;
-		//}
-		//int k1 = i;
 		int k1 = n;
 		//for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { cout << key_mtr[i][j] << " "; }cout << endl; }cout << endl;
 		for (i = 0; i < k1; i++) { //дешифруем  i элемент вектора
